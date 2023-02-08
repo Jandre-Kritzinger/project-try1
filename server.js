@@ -34,14 +34,14 @@ app.post('/login', (req, res) => {
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
-    console.log("asd")
     if (token == null) {
         return res.sendStatus(401)
     }
-    console.log("123")
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403)
-        console.log("321123")
+        if (err) {
+            console.log("asdasdasd")
+            return res.sendStatus(403)
+        }
         req.user = user
         next()
     })
